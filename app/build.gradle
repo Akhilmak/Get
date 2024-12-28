@@ -1,0 +1,78 @@
+plugins {
+    alias(libs.plugins.android.application)
+    id("com.chaquo.python")
+
+}
+
+android {
+    namespace 'com.downloader.get'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.downloader.get"
+        minSdk 33
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            // On Apple silicon, you can omit x86_64.
+            abiFilters "arm64-v8a", "x86_64"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    flavorDimensions "pyVersion"
+    productFlavors {
+        create("py310") { dimension = "pyVersion" }
+        create("py311") { dimension = "pyVersion" }
+    }
+
+}
+chaquopy {
+    defaultConfig {
+        version = "3.12"
+        buildPython("C:\\Python312\\python.exe")
+        pip {
+            // A requirement specifier, with or without a version number:
+            install("yt-dlp")
+//            install("requests==2.24.0")
+//
+//            // An sdist or wheel filename, relative to the project directory:
+//            install("MyPackage-1.2.3-py2.py3-none-any.whl")
+
+            // A directory containing a setup.py, relative to the project
+            // directory (must contain at least one slash):
+//            install("./MyPackage")
+
+            // "-r"` followed by a requirements filename, relative to the
+            // project directory:
+//            install("-r", "requirements.txt")
+        }
+    }
+    productFlavors {
+        getByName("py310") { version = "3.10" }
+    }
+    sourceSets { }
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}

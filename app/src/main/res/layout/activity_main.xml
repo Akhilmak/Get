@@ -4,55 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".MainActivity">
 
-<!--    <Button-->
-<!--        android:id="@+id/button"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Click"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:layout_editor_absoluteX="16dp" />-->
-
-    <!-- ProgressBar to show download progress -->
-
+    <!-- EditText for URL input -->
     <EditText
         android:id="@+id/urlInput"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
         android:hint="Enter Video URL"
         android:inputType="textUri"
-        app:layout_constraintBottom_toTopOf="@+id/progressText"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-9dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="88dp" />
 
+    <!-- Spinner to choose the format -->
+    <Spinner
+        android:id="@+id/formatSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/urlInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Button to initiate download -->
     <Button
         android:id="@+id/downloadButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Download"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressText"
-        tools:layout_editor_absoluteX="25dp" />
+        app:layout_constraintTop_toBottomOf="@id/formatSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
+    <!-- ProgressBar for download progress -->
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/downloadButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
-    <!-- TextView to show the percentage -->
+    <!-- TextView to display download progress percentage -->
     <TextView
         android:id="@+id/progressText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="0%"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="353dp" />
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

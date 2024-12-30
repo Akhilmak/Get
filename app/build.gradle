@@ -24,8 +24,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -35,7 +36,6 @@ android {
     flavorDimensions "pyVersion"
     productFlavors {
         create("py310") { dimension = "pyVersion" }
-        create("py311") { dimension = "pyVersion" }
     }
 
 }
